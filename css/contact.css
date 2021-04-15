@@ -1,0 +1,48 @@
+*{
+    box-sizing: border-box;
+}
+
+.container{
+    width: 90%;
+    margin: auto;
+    background-color: #f7f7f7;
+}
+
+nav{
+    background-color: #8C8E79;
+}
+
+main img{
+    width: 100%;
+}
+
+.navWhiteHead{
+    color: white;
+    font-size: 35px;
+}
+
+.navWhite{
+    color: white;
+}
+
+aside{
+    padding: 10px;
+    background-color: #8C8E79;
+    color: #f7f7f7;
+    margin-top: 10px;
+}
+
+aside h1{
+    text-align: center;
+}
+
+.buttons{
+    margin: 10px;
+    text-align: center;
+}
+
+footer{
+    padding: 10px;
+    background-color:#8C8E79;
+}
+
