@@ -118,15 +118,17 @@ if(isset($_POST['submit'])){
     
     <footer>
         <div class="row">
-            <div class="col-4">
-                <a href="login.php" target="_blank">Login</a>
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-2 mt-2">
+                <center>
+                    <a href="login.php" target="_blank">Login</a>
+                </center>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-4 col-sm-12 mt-2">
                 <center>
                     <p>&copy; Copywrite Murphy Cemetery <script> new Date().getFullYear()</script></p>
                 </center>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-4 col-sm-12 mt-2">
                 <center>
                     <p>Nevada, IA 50201</p>
                 </center>
