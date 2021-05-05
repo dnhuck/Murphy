@@ -1,10 +1,11 @@
 <?php
 
-require_once('contact.class.php');
+require_once('inc/contact.class.php');
+$validContactForm = new validateContactForm();
 
 // set values to nothing to avoid conflicts
 $name = "";
-$email = "";
+$fromEmail = "";
 $message = "";
 
 // error messages
@@ -15,19 +16,25 @@ $messageErrMsg = "";
 if(isset($_POST['submit'])){
 
     $name = $_POST['name'];
-    $email = $_POST['email'];
+    $fromEmail = $_POST['email'];
     $message = $_POST['message'];
 
-    $validContactForm = new validateContactForm();
-
     //$validContactForm->getDataFromForm();
-    $validContactForm->validateFirstName($fName);
-    $validContactForm->validateLastName($email);
-    $validContactForm->validateMessage($message);
+    $validName = $validContactForm->validateName($name);
+    $validEmail = $validContactForm->validateEmail($fromEmail);
+    $validMessage = $validContactForm->validateMessage($message);
     //$validContactForm->saveData();
 
-    if($validContactForm == ""){
-        $validContactForm->saveData();
+   // var_dump($validName);die;
+
+    if($validName == "" && $validEmail == "" && $validMessage == ""){
+        $mailTo = 'contact@davidhuck.net';
+            $headers = "From: " . $fromEmail;
+            $txt = "You have a new email from " . $name . ".\n\n" . $message;
+            echo '<script> alert("Email Sent!")</script>';
+            mail($mailTo, $txt, $message, $headers);
+            header('Location: contactConfirmation.php');
+            exit;
     }
 
 }
@@ -59,7 +66,7 @@ if(isset($_POST['submit'])){
     <div class="collapse navbar-collapse mr-2" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item pr-2">
-                <a class="nav-link" href="index.html"><span class="navWhite">Home</span></a>
+                <a class="nav-link" href="../index.html"><span class="navWhite">Home</span></a>
             </li>
             <li class="nav-item pr-2">
                 <a class="nav-link" href="about.html"><span class="navWhite">About</span></a>
@@ -81,31 +88,8 @@ if(isset($_POST['submit'])){
         </main>
         
         <aside>
-            <h1>Contact Us</h1>
-
-            <form method="POST" action="#">
-
-                <div class="form-group col-10 m-auto">
-                    <label for="name">Name:</label>
-                    <input type="name" class="form-control" id="name" placeholder="Enter your name here"><span><?php echo $nameErrMsg; ?></span>
-                </div>
-
-                <div class="form-group col-10 m-auto">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email"><span><?php echo $emailErrMsg; ?></span>
-                </div>
-
-                <div class="form-group col-10 m-auto">
-                    <label for="message">Message: </label>
-                    <textarea class="form-control" name="message" id="message" placeholder="Enter message here"></textarea><span><?php echo $messageErrMsg; ?></span>
-                </div>
-            
-                <div class="buttons"> 
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn">Reset</button>
-                </div>
-
-            </form>
+            <h1>Email Sent!</h1>
+            <a href="contact.php">Back</a>
         </aside>
 
         <aside class="map">
@@ -136,4 +120,4 @@ if(isset($_POST['submit'])){
         </div>
     </footer>
 </body>
-</html>
+</html> 
